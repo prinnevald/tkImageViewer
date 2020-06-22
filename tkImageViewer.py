@@ -13,23 +13,23 @@ class Memory():
 
 # change the image functions
 
+def reconfig(status, label, mem):
+    label.configure(image=mem.images[mem.cursor])
+    stat = mem.cursor + 1
+    status.configure(text="Image "+str(stat)+" of "+str(len(mem.images)))
+
 def prevImg(status, label, mem):
     mem.cursor = mem.cursor - 1
     if mem.cursor == -1:
         mem.cursor = mem.cursor + 1
+    reconfig(status, label, mem)
 
-    label.configure(image=mem.images[mem.cursor])
-    stat = mem.cursor + 1
-    status.configure(text="Image "+str(stat)+" of "+str(len(mem.images)))
 
 def nextImg(status, label, mem):
     mem.cursor = mem.cursor + 1
     if mem.cursor == len(mem.images):
         mem.cursor = mem.cursor - 1
-
-    label.configure(image=mem.images[mem.cursor])
-    stat = mem.cursor + 1
-    status.configure(text="Image "+str(stat)+" of "+str(len(mem.images)))
+    reconfig(status, label, mem)
 
 ### MAIN ###
 
